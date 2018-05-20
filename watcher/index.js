@@ -22,7 +22,7 @@ const upsert = async (path) => {
     const title = refine(filename);
     const match = await tmdb(title, { apikey: process.env.API_KEY });
 
-    if (!match) {
+    if (!match || !title || title === '') {
         console.info(chalk.yellow(`[Warning]: `) + `Movie ${filename} was not found on TMDB`);
         console.info(chalk.yellow(`[Warning]: `) + `Consider renaming it for a better match`);
     } else {
