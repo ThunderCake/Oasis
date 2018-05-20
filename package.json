@@ -5,6 +5,9 @@
   "repository": "git@github.com:ThunderCake/Oasis.git",
   "author": "Felix Yadomi <dev.yadomi@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "watcher": "node watcher/index.js"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
     "chokidar": "^2.0.3",
@@ -14,5 +17,9 @@
     "nedb": "^1.8.0",
     "rafini": "https://github.com/yadomi/rafini#4ce8ca682ba7250592142f166c6aeea29205b606",
     "request": "^2.86.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
   }
 }

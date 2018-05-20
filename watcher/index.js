@@ -1,11 +1,11 @@
 const chokidar = require('chokidar');
 const md5 = require('md5-file/promise');
+const chalk = require('chalk');
 const { existSync, writeFileSync } = require('fs');
 const { basename } = require('path');
-
 const { refine, tmdb } = require('rafini');
-const chalk = require('chalk');
-const { oasis } = require('./db');
+
+const { oasis } = require('../shared/db');
 
 const toWatch = [
     '/Users/yadomi/Movies/*.mp4',
