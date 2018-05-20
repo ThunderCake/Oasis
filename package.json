@@ -1,0 +1,14 @@
+{
+  "name": "oasis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ThunderCake/Oasis.git",
+  "author": "Felix Yadomi <dev.yadomi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chokidar": "^2.0.3",
+    "jsonfile": "^4.0.0",
+    "md5-file": "^4.0.0",
+    "nedb": "^1.8.0"
+  }
+}
