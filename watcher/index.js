@@ -20,7 +20,7 @@ const upsert = async (path) => {
 
     const filename = basename(path);
     const title = refine(filename);
-    const match = await tmdb(title, { apikey: '***REMOVED***' });
+    const match = await tmdb(title, { apikey: process.env.API_KEY });
 
     if (!match) {
         console.info(chalk.yellow(`[Warning]: `) + `Movie ${filename} was not found on TMDB`);
