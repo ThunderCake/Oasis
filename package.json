@@ -6,10 +6,13 @@
   "author": "Felix Yadomi <dev.yadomi@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.1",
     "chokidar": "^2.0.3",
     "express": "^4.16.3",
     "jsonfile": "^4.0.0",
     "md5-file": "^4.0.0",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "rafini": "https://github.com/yadomi/rafini#4ce8ca682ba7250592142f166c6aeea29205b606",
+    "request": "^2.86.0"
   }
 }
