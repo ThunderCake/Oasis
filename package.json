@@ -6,7 +6,8 @@
   "author": "Felix Yadomi <dev.yadomi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "watcher": "node watcher/index.js"
+    "watcher": "node watcher/index.js",
+    "server": "node api/index.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
