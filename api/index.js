@@ -2,27 +2,29 @@ const express = require('express')
 const NeDB = require('nedb')
 const Rsync = require('rsync')
 const { hosts, settings } = require('../shared/db')
-const { resolve } = require('path');
+const { resolve } = require('path')
 
 const api = express()
 api.use(express.json())
 
 const PORT = 4242
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
 if (NODE_ENV === 'development') {
-    const webpack = require('webpack');
-    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpack = require('webpack')
+    const webpackDevMiddleware = require('webpack-dev-middleware')
 
-    const config = require('../webpack.development.js');
-    const compiler = webpack(config);
+    const config = require('../webpack.development.js')
+    const compiler = webpack(config)
 
-    api.use(webpackDevMiddleware(compiler, {
-        publicPath: config.output.publicPath
-    }));
-    api.use(require("webpack-hot-middleware")(compiler));
+    api.use(
+        webpackDevMiddleware(compiler, {
+            publicPath: config.output.publicPath,
+        })
+    )
+    api.use(require('webpack-hot-middleware')(compiler))
 } else {
-    api.use('/public', express.static(resolve(__dirname, '../public/')));
+    api.use('/public', express.static(resolve(__dirname, '../public/')))
 }
 
 /**
@@ -111,7 +113,7 @@ api.post('/api/remotedb/:id', async (req, res) => {
 })
 
 api.get('*', (req, res) => {
-    return res.sendFile(resolve(__dirname, '../public/index.html'));
+    return res.sendFile(resolve(__dirname, '../public/index.html'))
 })
 
 api.listen(PORT, () => {
