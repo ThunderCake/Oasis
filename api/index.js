@@ -28,12 +28,12 @@ if (NODE_ENV === 'development') {
 /**
  * setting endpoint
  */
-api.get('/api/settings', async (req, res) => {
+api.get('/api/setting', async (req, res) => {
     const results = await settings.findAsync({})
     return res.json(results)
 })
 
-api.post('/api/settings/add', async (req, res) => {
+api.post('/api/setting/add', async (req, res) => {
     const params = req.body
     await settings.ensureIndexAsync({ fieldName: 'key', unique: true })
     try {
