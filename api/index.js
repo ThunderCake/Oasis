@@ -2,6 +2,7 @@ const express = require('express')
 const NeDB = require('nedb')
 const Rsync = require('rsync')
 const { hosts, settings } = require('../shared/db')
+const { resolve } = require('path');
 
 const api = express()
 api.use(express.json())
@@ -24,20 +25,15 @@ if (NODE_ENV === 'development') {
     api.use('/public', express.static(resolve(__dirname, '../public/')));
 }
 
-api.get('*', (req, res) => {
-    return res.sendFile(resolve(__dirname, '../public/index.html'));
-})
-
-
 /**
  * setting endpoint
  */
-api.get('/settings', async (req, res) => {
+api.get('/api/settings', async (req, res) => {
     const results = await settings.findAsync({})
     return res.json(results)
 })
 
-api.post('/settings/add', async (req, res) => {
+api.post('/api/settings/add', async (req, res) => {
     const params = req.body
     await settings.ensureIndexAsync({ fieldName: 'key', unique: true })
     try {
@@ -52,12 +48,12 @@ api.post('/settings/add', async (req, res) => {
 /**
  * host endpoint
  */
-api.get('/host/list', async (req, res) => {
+api.get('/api/host/list', async (req, res) => {
     const result = await hosts.findAsync({})
     res.send(result)
 })
 
-api.post('/host/add', async (req, res) => {
+api.post('/api/host/add', async (req, res) => {
     const posts = req.body
     await hosts.ensureIndexAsync({ fieldName: 'domain', unique: true })
     try {
@@ -69,7 +65,7 @@ api.post('/host/add', async (req, res) => {
     }
 })
 
-api.put('/host/update/:id', async (req, res) => {
+api.put('/api/host/update/:id', async (req, res) => {
     const body = req.body
     const { id } = req.params
 
@@ -83,7 +79,7 @@ api.put('/host/update/:id', async (req, res) => {
 /**
  * remote db endpoint
  */
-api.post('/remotedb/:id', async (req, res) => {
+api.post('/api/remotedb/:id', async (req, res) => {
     const { id } = req.params
 
     const entry = await hosts.findOneAsync({ _id: id })
@@ -112,6 +108,10 @@ api.post('/remotedb/:id', async (req, res) => {
             return res.send(entries)
         })
     })
+})
+
+api.get('*', (req, res) => {
+    return res.sendFile(resolve(__dirname, '../public/index.html'));
 })
 
 api.listen(PORT, () => {
