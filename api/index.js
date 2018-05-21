@@ -58,16 +58,17 @@ api.post('/api/setting', async (req, res) => {
 /**
  * host endpoint
  */
-api.get('/api/host/list', async (req, res) => {
+api.get('/api/host', async (req, res) => {
     const result = await hosts.findAsync({})
     res.send(result)
 })
 
-api.post('/api/host/add', async (req, res) => {
-    const posts = req.body
-    await hosts.ensureIndexAsync({ fieldName: 'domain', unique: true })
+api.post('/api/host', async (req, res) => {
+    const entry = req.body
+    await hosts.ensureIndexAsync({ fieldName: 'hostname', unique: true })
+    console.log({ entry })
     try {
-        const entries = await hosts.insertAsync(posts)
+        const entries = await hosts.insertAsync(entry)
         return res.json(entries)
     } catch (e) {
         res.status(400)
@@ -75,7 +76,7 @@ api.post('/api/host/add', async (req, res) => {
     }
 })
 
-api.put('/api/host/update/:id', async (req, res) => {
+api.put('/api/host/:id', async (req, res) => {
     const body = req.body
     const { id } = req.params
 

@@ -1,3 +1,30 @@
-body, html {
-    margin: 15px;
+@import './variables.scss';
+
+body,
+html {
+  color: $colorFont;
+  line-height: 1.15;
+  font-size: 14px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background: $colorBackground;
+}
+
+body {
+  margin: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: $colorFont;
+}
+
+h1,
+h2,
+h3,
+h4,
+h4 {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
 }

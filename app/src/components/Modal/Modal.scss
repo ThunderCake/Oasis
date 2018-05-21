@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+.view {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $colorBackgroundContent;
+  padding: 16px;
+  width: 66vw;
+  max-width: 66%;
+  border-radius: 3px;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.3);
+
+  .close {
+    cursor: pointer;
+    outline: none;
+    color: #eee;
+    background: none;
+    border: none;
+    font-size: 2em;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+
+  > header {
+    margin: 16px 0;
+  }
+}

@@ -1,18 +1,6 @@
 import React, { Component } from 'react'
-import { withRouter, Switch, Route } from 'react-router-dom'
-import { Home, Settings } from '../../components'
-
-import Header from 'grommet/components/Header'
-import Title from 'grommet/components/Title'
-import Box from 'grommet/components/Box'
-import Menu from 'grommet/components/Menu'
-import Anchor from 'grommet/components/Anchor'
-import Toast from 'grommet/components/Toast'
-
-import IconApps from 'grommet/components/icons/base/Apps'
-import IconConfigure from 'grommet/components/icons/base/Configure'
-import IconCluster from 'grommet/components/icons/base/ServerCluster'
-import IconHome from 'grommet/components/icons/base/Home'
+import { withRouter, Switch, Route, Link } from 'react-router-dom'
+import { Home, Settings, Hosts } from '../../components'
 
 class App extends Component {
     state = {
@@ -40,36 +28,19 @@ class App extends Component {
         const { UIShowIncompleteSetupToast } = this.state
         return (
             <div>
-                {UIShowIncompleteSetupToast ? (
-                    <Toast status="warning" onClose={this._handleToastClose}>
-                        Please configure first your TMDB_KEY and some paths to
-                        watch
-                    </Toast>
-                ) : null}
-                <Header>
-                    <Title>Oasis</Title>
-                    <Box flex={true} justify="end" direction="row">
-                        <Menu
-                            icon={<IconApps />}
-                            dropAlign={{ right: 'right' }}>
-                            <Anchor icon={<IconHome />} label="Home" path="/" />
-                            <Anchor
-                                icon={<IconCluster />}
-                                label="Manage hosts"
-                                path="/hosts"
-                            />
-                            <Anchor
-                                icon={<IconConfigure />}
-                                label="Settings"
-                                path="/settings"
-                            />
-                        </Menu>
-                    </Box>
-                </Header>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/settings" component={Settings} />
-                </Switch>
+                <header>
+                    <h1>Oasis</h1>
+                    <div>
+                        <Link to="/">Home</Link>
+                        <Link to="/hosts">Manage hosts</Link>
+                        <Link to="/settings">Settings</Link>
+                    </div>
+                </header>
+                {/* <Switch> */}
+                <Route path="/" component={Home} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/hosts" component={Hosts} />
+                {/* </Switch> */}
             </div>
         )
     }

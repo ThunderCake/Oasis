@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { Modal } from '../../components'
+import { withRouter } from 'react-router-dom'
 
-import Form from 'grommet/components/Form'
-import FormField from 'grommet/components/FormField'
-import TextInput from 'grommet/components/TextInput'
+const Header = () => <h1>Settings</h1>
 
 class Settings extends Component {
     state = {
@@ -37,27 +37,31 @@ class Settings extends Component {
         this.setState({ isLoading: false })
     }
 
+    _handleClose = () => {
+        this.props.history.push('/')
+    }
+
     render () {
         // console.log(this.state)
         return (
-            <Form>
-                <FormField label="Your TMDB API Key">
-                    <TextInput
+            <Modal onClose={this._handleClose} header={<Header />}>
+                <fieldset label="Your TMDB API Key">
+                    <input
                         value={this.state.tmdbKey || ''}
                         onBlur={this._handleBlur('tmdbKey')}
-                        onDOMChange={this._handleChange('tmdbKey')}
+                        onChange={this._handleChange('tmdbKey')}
                     />
-                </FormField>
-                <FormField label="Paths to watch (must be absolute, comma sperated)">
-                    <TextInput
+                </fieldset>
+                <fieldset label="Paths to watch (must be absolute, comma sperated)">
+                    <input
                         value={this.state.toWatch || ''}
                         onBlur={this._handleBlur('toWatch')}
-                        onDOMChange={this._handleChange('toWatch')}
+                        onChange={this._handleChange('toWatch')}
                     />
-                </FormField>
-            </Form>
+                </fieldset>
+            </Modal>
         )
     }
 }
 
-export default Settings
+export default withRouter(Settings)

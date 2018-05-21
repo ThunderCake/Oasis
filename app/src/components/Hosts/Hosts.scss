@@ -1,0 +1,41 @@
+@import '../../variables.scss';
+
+.list {
+  padding: 16px 0;
+
+  > div:first-child {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+  }
+
+  > div {
+    padding: 16px 8px;
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    > span {
+      outline: none;
+    }
+
+    > span:nth-child(1) {
+      width: 40%;
+    }
+
+    > span:nth-child(2) {
+      width: 20%;
+    }
+
+    > span:nth-child(3) {
+      width: 20%;
+    }
+
+    > span:nth-child(4) {
+      width: 20%;
+    }
+
+    > span:nth-child(5) {
+      width: 20%;
+      text-align: right;
+    }
+  }
+}
