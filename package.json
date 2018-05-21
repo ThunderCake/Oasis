@@ -26,8 +26,11 @@
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.47",
+    "@babel/polyfill": "^7.0.0-beta.47",
     "@babel/preset-env": "^7.0.0-beta.47",
+    "@babel/preset-es2017": "^7.0.0-beta.47",
     "@babel/preset-react": "^7.0.0-beta.47",
+    "@babel/preset-stage-0": "^7.0.0-beta.47",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta",
     "css-loader": "^0.28.11",
