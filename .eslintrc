@@ -1,0 +1,26 @@
+{
+    "extends": "standard",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "arrowFunctions": true,
+            "classes": true
+        }
+    },
+    "rules": {
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "indent": [
+            "error",
+            4
+        ]
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}
