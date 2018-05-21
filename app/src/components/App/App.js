@@ -17,14 +17,13 @@ import IconHome from 'grommet/components/icons/base/Home'
 class App extends Component {
     state = {
         hosts: [],
-        settings: {},
     }
 
     async componentDidMount () {
         const settings = await fetch('/api/setting').then(res => res.json())
         const { history } = this.props
 
-        if (!settings.setupComplete) {
+        if (!settings.tmdbKey && !settings.toWatch) {
             history.push('/settings')
             this.setState({
                 UIShowIncompleteSetupToast: true,

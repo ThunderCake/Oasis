@@ -1,49 +1,63 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+
+import Form from 'grommet/components/Form'
+import FormField from 'grommet/components/FormField'
+import TextInput from 'grommet/components/TextInput'
 
 class Settings extends Component {
+    state = {
+        settings: {},
+        isLoading: false,
+    }
 
-    state = {}
+    async componentDidMount () {
+        const settings = await fetch('/api/setting').then(res => res.json())
+        this.setState({ ...settings })
+    }
 
-    _handleChage = key => (event) => {
-        const { value } = event.target
-
+    _handleChange = key => ({ target: { value } }) => {
         this.setState({
-            [key]: value
+            [key]: value,
         })
     }
 
-    _handleOnBlur = key => (event) => {
-        const value = this.state[key]
-        const body = {
-            key: value
-        }
+    _handleBlur = key => async event => {
+        const { [key]: value } = this.state
+        const body = JSON.stringify({ key, value })
 
-        const response = fetch('/api/setting/add',
-            {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body)
-            }).then((response) => {
-                var content = response.json()
-                console.log(content)
-            })
+        this.setState({ isLoading: true })
+        await fetch('/api/setting', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body,
+        })
+        this.setState({ isLoading: false })
     }
 
-    render() {
+    render () {
+        // console.log(this.state)
         return (
-            <div>
-                <h1>Settings</h1>
-                <Link to="/">Home</Link>
-
-                <input onBlur={this._handleOnBlur('tmdb_api_key')} onChange={this._handleChage('tmdb_api_key')} type="text" name="tmdb_api_key" placeholder="Tmdb Api Key"></input>
-                <textarea onBlur={this._handleOnBlur('watch_paths')} onChange={this._handleChage('watch_paths')} name="watch_paths" id="" cols="40" rows="10" placeholder="Watch path"></textarea>
-            </div>
+            <Form>
+                <FormField label="Your TMDB API Key">
+                    <TextInput
+                        value={this.state.tmdbKey || ''}
+                        onBlur={this._handleBlur('tmdbKey')}
+                        onDOMChange={this._handleChange('tmdbKey')}
+                    />
+                </FormField>
+                <FormField label="Paths to watch (must be absolute, comma sperated)">
+                    <TextInput
+                        value={this.state.toWatch || ''}
+                        onBlur={this._handleBlur('toWatch')}
+                        onDOMChange={this._handleChange('toWatch')}
+                    />
+                </FormField>
+            </Form>
         )
     }
 }
 
-export default Settings;
+export default Settings

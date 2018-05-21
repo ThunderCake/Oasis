@@ -3,6 +3,7 @@ const NeDB = require('nedb')
 const Rsync = require('rsync')
 const { hosts, settings } = require('../shared/db')
 const { resolve } = require('path')
+const { assoc, reduce } = require('ramda')
 
 const api = express()
 api.use(express.json())
@@ -32,15 +33,22 @@ if (NODE_ENV === 'development') {
  */
 api.get('/api/setting', async (req, res) => {
     const results = await settings.findAsync({})
-    return res.json(results)
+    const entries = reduce(
+        (sum, { key, value }) => assoc(key, value, sum),
+        {},
+        results
+    )
+
+    return res.json(entries)
 })
 
-api.post('/api/setting/add', async (req, res) => {
-    const params = req.body
+api.post('/api/setting', async (req, res) => {
+    const { key, value } = req.body
     await settings.ensureIndexAsync({ fieldName: 'key', unique: true })
+
     try {
-        const entries = await settings.insertAsync(params)
-        return res.json(entries)
+        await settings.updateAsync({ key }, { key, value }, { upsert: true })
+        return res.send()
     } catch (e) {
         res.status(400)
         return res.json({ error: e.message })
