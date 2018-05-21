@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './App.scss';
 import { Switch, Route, Link } from 'react-router-dom';
 
-const Home = () => (
-    <div>
-        <h1>Home</h1>
-        <Link to="/settings">Settings</Link>
-    </div>
-)
+class Home extends Component {
+
+    state = {
+        hosts: []
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Home</h1>
+                <Link to="/settings">Settings</Link>
+            </div>
+        )
+    }
+}
 
 const Settings = () => (
     <div>
@@ -19,10 +28,10 @@ const Settings = () => (
 const App = () => {
     return (
         <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/settings' component={Settings}/>
+            <Route exact path='/' component={Home} />
+            <Route path='/settings' component={Settings} />
         </Switch>
     );
-  };
+};
 
 export default App;
