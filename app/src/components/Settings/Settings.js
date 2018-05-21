@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const Settings = () => (
     <div>
-        <h1>Settings</h1>
         <Link to="/">Home</Link>
     </div>
 )

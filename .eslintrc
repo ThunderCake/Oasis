@@ -1,5 +1,5 @@
 {
-    "extends": "standard",
+    "extends": ["standard", "plugin:react/recommended"],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
@@ -10,14 +10,8 @@
         }
     },
     "rules": {
-        "comma-dangle": [
-            "error",
-            "always-multiline"
-        ],
-        "indent": [
-            "error",
-            4
-        ]
+        "comma-dangle": ["error", "always-multiline"],
+        "indent": ["error", 4]
     },
     "env": {
         "browser": true,
